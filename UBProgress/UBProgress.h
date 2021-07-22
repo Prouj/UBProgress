@@ -47,41 +47,7 @@ typedef NS_ENUM (NSUInteger, YLProgressBarType)
   /**
    * The progress bar has squared corners and no gloss.
    */
-  YLProgressBarTypeFlat    = 1,
-};
-
-/**
- * The stripes orientation.
- */
-typedef NS_ENUM (NSUInteger, YLProgressBarStripesOrientation)
-{
-  /**
-   * The stripes are obliques in the north-west direction.
-   */
-  YLProgressBarStripesOrientationRight    = 0,
-  /**
-   * The stripes are obliques in the south-west direction.
-   */
-  YLProgressBarStripesOrientationLeft     = 1,
-  /**
-   * The stripes are verticals.
-   */
-  YLProgressBarStripesOrientationVertical = 2,
-};
-
-/**
- * The stripes movement direction.
- */
-typedef NS_ENUM (NSInteger, YLProgressBarStripesDirection)
-{
-  /**
-   * The stripes go from right to left.
-   */
-  YLProgressBarStripesDirectionLeft  = -1,
-  /**
-   * The stripes go from left to right.
-   */
-  YLProgressBarStripesDirectionRight = 1
+//  YLProgressBarTypeFlat    = 1,
 };
 
 /**
@@ -110,26 +76,29 @@ typedef NS_ENUM (NSUInteger, YLProgressBarBehavior)
 /**
  * The display mode of the indicator text.
  */
-typedef NS_ENUM (NSUInteger, YLProgressBarIndicatorTextDisplayMode)
+typedef NS_ENUM (NSUInteger, UBProgressBarIndicatorTextDisplayMode)
 {
   /**
    * The indicator text is not displayed.
    */
-  YLProgressBarIndicatorTextDisplayModeNone     = 0,
+  UBProgressBarIndicatorTextDisplayModeNone     = 0,
   /**
    * The indicator text is displayed over the track bar and below the progress
    * bar.
    */
-  YLProgressBarIndicatorTextDisplayModeTrack    = 1,
+  UBProgressBarIndicatorTextDisplayModeFixCenter    = 1,
   /**
    * The indicator text is diplayed over the progress bar.
    */
-  YLProgressBarIndicatorTextDisplayModeProgress = 2,
+  UBProgressBarIndicatorTextDisplayModeProgressRight = 2,
+    
+    
+  UBProgressBarIndicatorTextDisplayModeProgressCenter = 3,
   /**
    * The indicator text is displayed over the track bar and over the progress
    * bar in the right.
    */
-  YLProgressBarIndicatorTextDisplayModeFixedRight = 3
+  UBProgressBarIndicatorTextDisplayModeFixedRight = 4
 };
 
 /**
@@ -178,6 +147,8 @@ IB_DESIGNABLE @interface UBProgress : UIView
  */
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
 
+-(void)setTypeText:(UBProgressBarIndicatorTextDisplayMode)type;
+
 #pragma mark Modifying the Progress Bar’s Behavior
 /** @name Modifying the Progress Bar’s Behavior */
 
@@ -194,49 +165,6 @@ IB_DESIGNABLE @interface UBProgress : UIView
 
 #pragma mark Configuring the Progress Bar
 /** @name Configuring the Progress Bar */
-
-/**
- * @abstract A Boolean value that determines whether the gloss effet (outer and
- * inner one) is hidden.
- * @discussion Setting the value of this property to YES hides the gloss effect
- * and setting it to NO shows the gloss effect whatever the progress type
- * (`YLProgressBarTypeRounded` or `YLProgressBarTypeFlat`). The value is updated
- * each time the type change.
- */
-@property (nonatomic, assign) IBInspectable BOOL hideGloss;
-
-/**
- * @abstract A Boolean value that determines whether the white inner shadow is hidden.
- * @discussion Setting the value of this property to YES hides the shadow effect
- * and setting it to NO shows the shadow effect when the progress type is
- * `YLProgressBarTypeRounded`.
- * The default value is set to NO.
- */
-@property (nonatomic, assign) IBInspectable BOOL hideInnerWhiteShadow;
-    
-/**
- * @abstract A Boolean value that determines whether the progress bar needs
- * stretch when the value change.
- * @discussion Setting the value of this property to YES means that the colors
- * of the `progressTintColors` is stretched.
- *
- * For example the `progressTintColors` is equal to `[blue, yellow, red]` and
- * the `value` is set to 50%.
- * If the progress bar is stretch the progress bar looks like that:
- * `|-blue.yellow.red-----------|`
- * Otherwise it should looks like that:
- * `|-blue.....yellow-----------|`
- *
- * The default value is set to YES.
- */
-@property (nonatomic, assign) IBInspectable BOOL progressStretch;
-
-/**
- * @abstract Set whether the color shown for the portion of the progress bar that is uniform.
- * @discussion The default value is NO.
- */
-@property (nonatomic, assign) IBInspectable BOOL uniformTintColor; //UI_APPEARANCE_SELECTOR;
-
 /**
  * @abstract The colors shown for the portion of the progress bar
  * that is filled.
@@ -296,71 +224,7 @@ IB_DESIGNABLE @interface UBProgress : UIView
  * @discussion The default value is set to
  * `YLProgressBarIndicatorTextDisplayModeNone`.
  */
-@property (nonatomic, assign) IBInspectable YLProgressBarIndicatorTextDisplayMode indicatorTextDisplayMode; //UI_APPEARANCE_SELECTOR;
-
-#pragma mark Configuring the Stripes
-/** @name Configuring the Stripes */
-
-/**
- * @abstract The animated vs. nonanimated stripes of the progress bar.
- * @discussion If YES, the stripes over the progress bar is moving from the left
- * to the right side.
- *
- * The default value for this property is YES.
- */
-@property (nonatomic, getter = isStripesAnimated) IBInspectable BOOL stripesAnimated;
-
-/**
- * @abstract The direction of the movement during the animation.
- * @discussion The default value for this property is
- * `YLProgressBarStripesDirectionRight`.
- */
-@property (nonatomic, assign) IBInspectable YLProgressBarStripesDirection stripesDirection; //UI_APPEARANCE_SELECTOR;
-
-/**
- * @abstract The velocity of the stripes during the animation. Higher is the
- * value, greater the distance traveled by the stripes during a frame is.
- * @discussion The absolute value of the property is taken into account. By
- * default the velocity is `1`.
- */
-@property (nonatomic, assign) IBInspectable double stripesAnimationVelocity; //UI_APPEARANCE_SELECTOR;
-
-/**
- * @abstract The orientation of the stripes.
- * @discussion The default value for this property is
- * `YLProgressBarStripesOrientationRight`.
- */
-@property (nonatomic, assign) IBInspectable YLProgressBarStripesOrientation stripesOrientation; //UI_APPEARANCE_SELECTOR;
-
-/**
- * @abstract The width of the stripes drawn over the progress bar.
- * @discussion If the property is less or equal than 0 the sprites are hidden.
- *
- * The default value for this property is equal to the
- * `YLProgressBarDefaultStripeWidth` value.
- */
-@property (nonatomic, assign) IBInspectable NSInteger stripesWidth; //UI_APPEARANCE_SELECTOR;
-
-/**
- * @abstract The color show for the stripes over the progress bar.
- */
-@property (nonatomic, strong, nonnull) IBInspectable UIColor *stripesColor; //UI_APPEARANCE_SELECTOR;
-
-/**
- * @abstract The x-coordinate distance in pixels between the top point and the
- * bottom point of a slanted stripe.
- * @discussion Default value is `YLProgressBarDefaultStripeDelta`. Positive
- * integers are expected for correct effect. Has no effect when
- * stripesOrientation property is `YLProgressBarStripesOrientationVertical`.
- */
-@property (nonatomic, assign) IBInspectable NSInteger stripesDelta; //UI_APPEARANCE_SELECTOR;
-
-/**
- * @abstract A Boolean value that determines whether the stripes are hidden.
- * @discussion Setting the value of this property to YES hides the stripes and
- * setting it to NO shows the stripes. The default value is NO.
- */
-@property (nonatomic, assign) IBInspectable BOOL hideStripes;
+@property (nonatomic, assign) IBInspectable UBProgressBarIndicatorTextDisplayMode indicatorTextDisplayMode; //UI_APPEARANCE_SELECTOR;
 
 /**
  * @abstract A Boolean value that determines whether the track is hidden.

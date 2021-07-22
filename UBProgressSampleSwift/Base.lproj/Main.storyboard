@@ -18,25 +18,57 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ug8-EJ-GoR" customClass="UBProgress">
                                 <rect key="frame" x="87" y="145" width="240" height="128"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="progressTintColor">
                                         <color key="value" systemColor="systemGreenColor"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="hideGloss" value="YES"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="progress">
-                                        <real key="value" value="0.90000000000000002"/>
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="trackTintColor">
+                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="progressStretch" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="uniformTintColor" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="hideInnerWhiteShadow" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="hideTrack" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="progressBarInset">
+                                        <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LY4-1S-3Y2">
+                                <rect key="frame" x="188" y="444" width="39" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="+10%"/>
+                                <connections>
+                                    <action selector="testButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XRn-Wn-m6d"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hz3-FE-75n">
+                                <rect key="frame" x="189" y="518" width="37" height="30"/>
+                                <state key="normal" title="-10%"/>
+                                <connections>
+                                    <action selector="menosButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yoB-Qv-Nye"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ug8-EJ-GoR" secondAttribute="trailing" constant="87" id="2mI-u6-aS5"/>
                             <constraint firstItem="ug8-EJ-GoR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="87" id="4G3-U7-xRd"/>
+                            <constraint firstItem="Hz3-FE-75n" firstAttribute="top" secondItem="LY4-1S-3Y2" secondAttribute="bottom" constant="44" id="8QG-52-oKQ"/>
+                            <constraint firstItem="Hz3-FE-75n" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="189" id="K5g-YG-y3M"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="LY4-1S-3Y2" secondAttribute="bottom" constant="388" id="UP5-ck-g8T"/>
+                            <constraint firstItem="LY4-1S-3Y2" firstAttribute="top" secondItem="ug8-EJ-GoR" secondAttribute="bottom" constant="171" id="Vps-p0-JfE"/>
+                            <constraint firstItem="LY4-1S-3Y2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="188" id="eal-yb-bt5"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Hz3-FE-75n" secondAttribute="trailing" constant="188" id="lRu-1W-T6G"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ug8-EJ-GoR" secondAttribute="bottom" constant="589" id="m1v-k4-Df7"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="LY4-1S-3Y2" secondAttribute="trailing" constant="187" id="rUD-rc-Thg"/>
                             <constraint firstItem="ug8-EJ-GoR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="101" id="tMu-mu-rTG"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Hz3-FE-75n" secondAttribute="bottom" constant="314" id="wjj-a9-EN4"/>
                         </constraints>
                     </view>
                     <connections>

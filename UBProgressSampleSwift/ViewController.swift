@@ -15,9 +15,26 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+
+//        progressBar.indicatorTextDisplayMode.
+//        progressBar.indicatorTextLabel.textColor = UIColor.red
+        progressBar.setTypeText(.fixedRight)
+        progressBar.cornerRadius = CGFloat(10)
+        progressBar.indicatorTextLabel.font = UIFont.systemFont(ofSize: 50)
+        
     }
 
-
+    @IBAction func testButton(_ sender: Any) {
+        var progress = progressBar.progress + 0.1
+        
+        progressBar.setProgress(CGFloat(progress), animated: true)
+        
+    }
+    
+    @IBAction func menosButton(_ sender: Any) {
+        var progress = progressBar.progress - 0.1
+        
+        progressBar.setProgress(CGFloat(progress), animated: true)
+    }
 }
 
