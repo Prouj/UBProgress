@@ -5,118 +5,65 @@
 //  Created by Paulo Uchôa on 20/07/21.
 //
 
-//#import <Foundation/Foundation.h>
-//#import <UIKit/UIKit.h>
-//#import <CoreGraphics/CoreGraphics.h>
-//
-//IB_DESIGNABLE @interface YLProgressBar : UIView
-//
-//- (void)initializeUBProgress;
-//
-//@end
-//
-////! Project version number for UBProgress.
-//FOUNDATION_EXPORT double UBProgressVersionNumber;
-//
-////! Project version string for UBProgress.
-//FOUNDATION_EXPORT const unsigned char UBProgressVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <UBProgress/PublicHeader.h>
-
-
-
-//-----------------------------------------------------------------
 
 #import <CoreGraphics/CoreGraphics.h>
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-// Global
-#define YLProgressBarDefaultStripeWidth 7 //px
-#define YLProgressBarDefaultStripeDelta 8 //px
 
-/**
- * The progress bar appearance.
- */
-typedef NS_ENUM (NSUInteger, YLProgressBarType)
-{
-  /**
-   * The progress bar has rounded corners and the gloss effect by default.
-   */
-  YLProgressBarTypeRounded = 0,
-  /**
-   * The progress bar has squared corners and no gloss.
-   */
-//  YLProgressBarTypeFlat    = 1,
+// The progress bar appearance.
+
+typedef NS_ENUM (NSUInteger, UBProgressBarType) {
+
+    // The progress bar has rounded corners.
+
+    UBProgressBarTypeRounded = 0,
+
+    // The progress bar has squared corners.
+
+    //  UBProgressBarTypeFlat    = 1,
 };
 
-/**
- * The behavior of a progress bar.
- */
-typedef NS_ENUM (NSUInteger, YLProgressBarBehavior)
-{
-  /**
-   * The default behavior of a progress bar. This mode is identical to the
-   * UIProgressView.
-   */
-  YLProgressBarBehaviorDefault       = 0,
-  /**
-   * The indeterminate behavior display the stripes when the progress value is
-   * equal to 0 only. This mode is helpful when percentage is not yet known,
-   * but will be known shortly.
-   */
-  YLProgressBarBehaviorIndeterminate = 1,
-  /**
-   * The waiting behavior display the stripes when the progress value is equal
-   * to 1 only.
-   */
-  YLProgressBarBehaviorWaiting       = 2,
+// The behavior of a progress bar.
+typedef NS_ENUM (NSUInteger, UBProgressBarBehavior) {
+    /**
+     * The default behavior of a progress bar. This mode is identical to the
+     * UIProgressView.
+     */
+    UBProgressBarBehaviorDefault       = 0,
+    /**
+     * The indeterminate behavior display the stripes when the progress value is
+     * equal to 0 only. This mode is helpful when percentage is not yet known,
+     * but will be known shortly.
+     */
+    UBProgressBarBehaviorIndeterminate = 1,
+    /**
+     * The waiting behavior display the stripes when the progress value is equal
+     * to 1 only.
+     */
+    UBProgressBarBehaviorWaiting       = 2,
 };
 
-/**
- * The display mode of the indicator text.
- */
-typedef NS_ENUM (NSUInteger, UBProgressBarIndicatorTextDisplayMode)
-{
-  /**
-   * The indicator text is not displayed.
-   */
-  UBProgressBarIndicatorTextDisplayModeNone     = 0,
-  /**
-   * The indicator text is displayed over the track bar and below the progress
-   * bar.
-   */
-  UBProgressBarIndicatorTextDisplayModeFixCenter    = 1,
-  /**
-   * The indicator text is diplayed over the progress bar.
-   */
-  UBProgressBarIndicatorTextDisplayModeProgressRight = 2,
+// The display mode of the indicator text.
+typedef NS_ENUM (NSUInteger, UBProgressBarIndicatorTextDisplayMode) {
+
+    // The indicator text is not displayed.
+    UBProgressBarIndicatorTextDisplayModeNone     = 0,
+
+    // The indicator text is displayed over the track bar and below the progress bar.
+    UBProgressBarIndicatorTextDisplayModeFixCenter    = 1,
+
+    // The indicator text is diplayed over the progress bar.
+    UBProgressBarIndicatorTextDisplayModeProgressRight = 2,
     
-    
-  UBProgressBarIndicatorTextDisplayModeProgressCenter = 3,
-  /**
-   * The indicator text is displayed over the track bar and over the progress
-   * bar in the right.
-   */
-  UBProgressBarIndicatorTextDisplayModeFixedRight = 4
+    //
+    UBProgressBarIndicatorTextDisplayModeProgressCenter = 3,
+
+    // The indicator text is displayed over the track bar and over the progress bar in the right.
+    UBProgressBarIndicatorTextDisplayModeFixedRight = 4
 };
 
-/**
- * The YLProgressBar is an UIProgressView replacement with an highly and fully
- * customizable animated progress bar.
- *
- * The YLProgressBar class provides properties for managing the style of the
- * track and the progress bar, managun its behavior and for getting and setting
- * values that are pinned to the progress of a task.
- *
- * Unlike the UIProgressView, the YLProgressBar can be used for as an
- * indeterminate progress indicator thanks to its pre-made behaviors.
- *
- * <em>Note: The YLProgressBar is conform to the UIAppearance protocol, however,
- * because of the current version of the appledoc project, the
- * UI_APPEARANCE_SELECTOR macros are not taken into account, that's why they
- * are commented.</em>
- */
+
 IB_DESIGNABLE @interface UBProgress : UIView
 
 #pragma mark Managing the Progress Bar
@@ -147,7 +94,7 @@ IB_DESIGNABLE @interface UBProgress : UIView
  */
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
 
--(void)setTypeText:(UBProgressBarIndicatorTextDisplayMode)type;
+- (void)setTypeText:(UBProgressBarIndicatorTextDisplayMode)type;
 
 #pragma mark Modifying the Progress Bar’s Behavior
 /** @name Modifying the Progress Bar’s Behavior */
@@ -161,7 +108,7 @@ IB_DESIGNABLE @interface UBProgress : UIView
  *
  * @discussion The default value is YLProgressBarBehaviorDefault.
  */
-@property (nonatomic, assign) IBInspectable YLProgressBarBehavior behavior; //UI_APPEARANCE_SELECTOR;
+@property (nonatomic, assign) IBInspectable UBProgressBarBehavior behavior; //UI_APPEARANCE_SELECTOR;
 
 #pragma mark Configuring the Progress Bar
 /** @name Configuring the Progress Bar */
@@ -196,7 +143,7 @@ IB_DESIGNABLE @interface UBProgress : UIView
  * @discussion The default value is set to `YLProgressBarTypeRounded`. The corner
  * radius can be configured through the `cornerRadius` property.
  */
-@property (nonatomic, assign) IBInspectable YLProgressBarType type; //UI_APPEARANCE_SELECTOR;
+@property (nonatomic, assign) IBInspectable UBProgressBarType type; //UI_APPEARANCE_SELECTOR;
 
 /**
  * @abstract The corner radius of the progress bar.

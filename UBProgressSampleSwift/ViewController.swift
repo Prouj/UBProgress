@@ -25,14 +25,14 @@ class ViewController: UIViewController {
     }
 
     @IBAction func testButton(_ sender: Any) {
-        var progress = progressBar.progress + 0.1
+        let progress = progressBar.progress + 0.1
         
         progressBar.setProgress(CGFloat(progress), animated: true)
         
     }
     
     @IBAction func menosButton(_ sender: Any) {
-        var progress = progressBar.progress - 0.1
+        let progress = progressBar.progress - 0.1
         
         progressBar.setProgress(CGFloat(progress), animated: true)
     }

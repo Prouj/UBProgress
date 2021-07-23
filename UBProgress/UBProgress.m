@@ -4,19 +4,18 @@
 //
 //  Created by Paulo Uchôa on 20/07/21.
 //
+
+
 #import "UBProgress.h"
 
 // Sizes
-const NSInteger YLProgressBarDefaultSizeInset = 1; //px
+const NSInteger UBProgressBarDefaultSizeInset = 1; //px
 
 // Animation times
-const NSTimeInterval YLProgressBarProgressTime = 0.25f;        // s
-
-// Font name
-//static NSString * YLProgressBarDefaultName = @"System";
+const NSTimeInterval UBProgressBarProgressTime = 0.25f; // s
 
 // Default progress value
-const CGFloat YLProgressBarDefaultProgress = 0.3f;
+const CGFloat UBProgressBarDefaultProgress = 0.3f;
 
 @interface UBProgress ()
 @property (nonatomic, assign) CGFloat internalCornerRadius;
@@ -24,20 +23,19 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
 @property (nonatomic, strong) NSTimer *progressTargetTimer;
 @property (nonatomic, assign) CGFloat progressTargetValue;
 
-/** Init the progress bar with the default values. */
+// Init the progress bar with the default values.
 - (void)initializeProgressBar;
 
-/** Build the stripes using the given parameters. */
-
-/** Draw the background (track) of the slider. */
+// Draw the background (track) of the slider.
 - (void)drawBackground:(CGContextRef)context withRect:(CGRect)rect;
-/** Draw the progress bar. */
+
+// Draw the progress bar.
 - (void)drawProgressBar:(CGContextRef)context withInnerRect:(CGRect)innerRect outterRect:(CGRect)outterRect;
-/** Draw the given text into the given location of the rect. */
+
+// Draw the given text into the given location of the rect.
 - (void)drawText:(CGContextRef)context withRect:(CGRect)rect;
 
-
-/** Callback for the setProgress:Animated: animation timer. */
+// Callback for the setProgress:Animated: animation timer.
 - (void)updateProgressWithTimer:(NSTimer *)timer;
 
 @end
@@ -45,54 +43,38 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
 @implementation UBProgress
 @synthesize progress = _progress;
 
-- (void)dealloc
-{
+- (void)dealloc {
     NSLog(@"dealloc !!!");
     
-    if (_progressTargetTimer && [_progressTargetTimer isValid])
-    {
+    if (_progressTargetTimer && [_progressTargetTimer isValid]) {
         [_progressTargetTimer invalidate];
     }
 }
 
-- (id)initWithFrame:(CGRect)frameRect
-{
-    if ((self = [super initWithFrame:frameRect]))
-    {
+- (id)initWithFrame:(CGRect)frameRect {
+    if ((self = [super initWithFrame:frameRect])) {
         [self initializeProgressBar];
     }
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    if ((self = [super initWithCoder:aDecoder]))
-    {
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if ((self = [super initWithCoder:aDecoder])) {
         [self initializeProgressBar];
     }
     return self;
 }
-
-//- (void)layoutSubviews {
-//    [super layoutSubviews];
-//
-////    CGFloat height = CGRectGetHeight(self.bounds) - CGRectGetHeight(self.bounds) / 10;
-//
-//}
 
 - (void)removeFromSuperview {
     [super removeFromSuperview];
     
-    if (_progressTargetTimer && [_progressTargetTimer isValid])
-    {
+    if (_progressTargetTimer && [_progressTargetTimer isValid]) {
         [_progressTargetTimer invalidate];
     }
 }
 
-- (void)drawRect:(CGRect)rect
-{
-    if (self.isHidden)
-    {
+- (void)drawRect:(CGRect)rect {
+    if (self.isHidden) {
         return;
     }
     
@@ -100,14 +82,12 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
     
     // Refresh the corner radius value
     self.internalCornerRadius = 0;
-    
 
     if (_cornerRadius > 0) {
         self.internalCornerRadius = _cornerRadius;
     }
-        // Draw the background track
-    if (!_hideTrack)
-    {
+    // Draw the background track
+    if (!_hideTrack) {
         [self drawBackground:context withRect:rect];
     }
     
@@ -122,39 +102,30 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
     CGRect centerRect;
     
     centerRect = CGRectMake(0,
-                           0,
-                           CGRectGetWidth(rect),
-                           CGRectGetHeight(rect));
-//
-//    if (self.progress == 0 && _behavior == YLProgressBarBehaviorIndeterminate)
-//    {
-//        [self drawProgressBar:context withInnerRect:innerRect outterRect:rect];
-//    } else if (self.progress > 0)
-//    {
+                            0,
+                            CGRectGetWidth(rect),
+                            CGRectGetHeight(rect));
+
     [self drawProgressBar:context withInnerRect:innerRect outterRect:rect];
     
     // Draw the indicator text if necessary
-    if (_indicatorTextDisplayMode == UBProgressBarIndicatorTextDisplayModeFixCenter)
-    {
+    if (_indicatorTextDisplayMode == UBProgressBarIndicatorTextDisplayModeFixCenter) {
         [self drawText:context withRect:centerRect];
     }
     
     // Draw the indicator text if necessary
-    if (_indicatorTextDisplayMode == UBProgressBarIndicatorTextDisplayModeProgressRight)
-    {
+    if (_indicatorTextDisplayMode == UBProgressBarIndicatorTextDisplayModeProgressRight) {
         [self drawText:context withRect:innerRect];
         _indicatorTextLabel.textAlignment = NSTextAlignmentRight;
     }
-    
-    if (_indicatorTextDisplayMode == UBProgressBarIndicatorTextDisplayModeProgressCenter)
-    {
+
+    // Draw the indicator text if necessary
+    if (_indicatorTextDisplayMode == UBProgressBarIndicatorTextDisplayModeProgressCenter) {
         [self drawText:context withRect:innerRect];
     }
-//    }
     
     // Draw the indicator text if necessary
-    if (_indicatorTextDisplayMode == UBProgressBarIndicatorTextDisplayModeFixedRight)
-    {
+    if (_indicatorTextDisplayMode == UBProgressBarIndicatorTextDisplayModeFixedRight) {
         [self drawText:context withRect:rect];
         _indicatorTextLabel.textAlignment = NSTextAlignmentRight;
     }
@@ -175,51 +146,40 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
 //  }
 //}
 
-- (CGFloat)progress
-{
-    @synchronized (self)
-    {
+- (CGFloat)progress {
+    @synchronized (self) {
         return _progress;
     }
 }
 
-- (void)setProgress:(CGFloat)progress
-{
+- (void)setProgress:(CGFloat)progress {
     [self setProgress:progress animated:YES];
 }
 
 
-- (void)setBehavior:(YLProgressBarBehavior)behavior
-{
+- (void)setBehavior:(UBProgressBarBehavior)behavior {
     _behavior = behavior;
     
     [self setNeedsDisplay];
 }
 
-- (void)setProgressTintColor:(UIColor *)progressTintColor
-{
+- (void)setProgressTintColor:(UIColor *)progressTintColor {
     progressTintColor  = (progressTintColor) ? progressTintColor : [UIColor blueColor];
     _progressTintColor = progressTintColor;
-    
-    
+
     [self setProgressTintColors:@[_progressTintColor, _progressTintColor]];
-    
-    
 }
 
-- (void)setProgressTintColors:(NSArray *)progressTintColors
-{
+- (void)setProgressTintColors:(NSArray *)progressTintColors {
     NSAssert(progressTintColors, @"progressTintColors must not be null");
     NSAssert([progressTintColors count], @"progressTintColors must contain at least one element");
     
-    if (_progressTintColors != progressTintColors)
-    {
+    if (_progressTintColors != progressTintColors) {
         _progressTintColors = progressTintColors;
     }
     
     NSMutableArray *colors  = [NSMutableArray arrayWithCapacity:[progressTintColors count]];
-    for (UIColor *color in progressTintColors)
-    {
+    for (UIColor *color in progressTintColors) {
         [colors addObject:(id)color.CGColor];
     }
     self.colors = colors;
@@ -227,28 +187,22 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
 
 #pragma mark - Public Methods
 
-- (void)setProgress:(CGFloat)progress animated:(BOOL)animated
-{
-    @synchronized (self)
-    {
-        if (_progressTargetTimer && [_progressTargetTimer isValid])
-        {
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated {
+    @synchronized (self) {
+        if (_progressTargetTimer && [_progressTargetTimer isValid]) {
             [_progressTargetTimer invalidate];
         }
         
         CGFloat newProgress = progress;
-        if (newProgress > 1.0f)
-        {
+        if (newProgress > 1.0f) {
             newProgress = 1.0f;
-        } else if (newProgress < 0.0f)
-        {
+        } else if (newProgress < 0.0f) {
             newProgress = 0.0f;
         }
         
-        if (animated)
-        {
+        if (animated) {
             _progressTargetValue = newProgress;
-            CGFloat incrementValue = ((_progressTargetValue - _progress) * (1.0f / 30.0f))/ YLProgressBarProgressTime;
+            CGFloat incrementValue = ((_progressTargetValue - _progress) * (1.0f / 30.0f))/ UBProgressBarProgressTime;
             
             if (incrementValue == 0) {
                 return;
@@ -260,8 +214,7 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
                                                              userInfo:[NSNumber numberWithFloat:incrementValue]
                                                               repeats:YES];
             [[NSRunLoop currentRunLoop] addTimer:_progressTargetTimer forMode:NSRunLoopCommonModes];
-        } else
-        {
+        } else {
             _progress = newProgress;
             
             [self setNeedsDisplay];
@@ -270,59 +223,51 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
 }
 
 - (void)setTypeText:(UBProgressBarIndicatorTextDisplayMode)typeText {
-//  _type = typeText;
+    //  _type = typeText;
 
-  switch (typeText) {
-    case 1:
-          _indicatorTextDisplayMode = UBProgressBarIndicatorTextDisplayModeFixCenter;
-
-      break;
-    case 2:
-          _indicatorTextDisplayMode = UBProgressBarIndicatorTextDisplayModeProgressRight;
-
-      break;
-    case 3:
-        _indicatorTextDisplayMode = UBProgressBarIndicatorTextDisplayModeProgressCenter;
-          
-        break;
-    case 4:
-          _indicatorTextDisplayMode = UBProgressBarIndicatorTextDisplayModeFixedRight;
-
-      break;
-    default:
-          _indicatorTextDisplayMode = UBProgressBarIndicatorTextDisplayModeNone;
-
-      break;
-  }
+    switch (typeText) {
+        case 1:
+            _indicatorTextDisplayMode = UBProgressBarIndicatorTextDisplayModeFixCenter;
+            break;
+        case 2:
+            _indicatorTextDisplayMode = UBProgressBarIndicatorTextDisplayModeProgressRight;
+            break;
+        case 3:
+            _indicatorTextDisplayMode = UBProgressBarIndicatorTextDisplayModeProgressCenter;
+            break;
+        case 4:
+            _indicatorTextDisplayMode = UBProgressBarIndicatorTextDisplayModeFixedRight;
+            break;
+        default:
+            _indicatorTextDisplayMode = UBProgressBarIndicatorTextDisplayModeNone;
+            break;
+    }
 }
 
 
 #pragma mark - Private Methods
 
-- (void)updateProgressWithTimer:(NSTimer *)timer
-{
+- (void)updateProgressWithTimer:(NSTimer *)timer {
     CGFloat dt_progress = [timer.userInfo floatValue];
     
     _progress += dt_progress;
     
     if ((dt_progress < 0 && _progress <= _progressTargetValue)
-        || (dt_progress > 0 && _progress >= _progressTargetValue))
-    {
+        || (dt_progress > 0 && _progress >= _progressTargetValue)) {
+
         [_progressTargetTimer invalidate];
         _progressTargetTimer = nil;
         
         _progress = _progressTargetValue;
     }
-    
     [self setNeedsDisplay];
 }
 
-- (void)initializeProgressBar
-{
-//    _type
-    _progress        = YLProgressBarDefaultProgress;
+- (void)initializeProgressBar {
+    //    _type
+    _progress        = UBProgressBarDefaultProgress;
     _hideTrack       = NO;
-    _behavior        = YLProgressBarBehaviorDefault;
+    _behavior        = UBProgressBarBehaviorDefault;
     _cornerRadius    = 0;
     
     _indicatorTextLabel                           = [[UILabel alloc] initWithFrame:self.frame];
@@ -338,25 +283,22 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
     
     self.trackTintColor           = [UIColor blackColor];
     self.progressTintColor        = self.backgroundColor;
-    self.progressBarInset         = YLProgressBarDefaultSizeInset;
+    self.progressBarInset         = UBProgressBarDefaultSizeInset;
     self.backgroundColor          = [UIColor clearColor];
 }
 
 
-- (void)drawBackground:(CGContextRef)context withRect:(CGRect)rect
-{
+- (void)drawBackground:(CGContextRef)context withRect:(CGRect)rect {
     // Define the progress bar pattern to clip all the content inside
     UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, CGRectGetWidth(rect), CGRectGetHeight(rect))
-                                                           cornerRadius:_internalCornerRadius];
+    cornerRadius:_internalCornerRadius];
     [roundedRect addClip];
     
-    CGContextSaveGState(context);
-    {
+    CGContextSaveGState(context); {
         CGFloat trackWidth  = CGRectGetWidth(rect);
         CGFloat trackHeight = CGRectGetHeight(rect);
         
-        if (_type == YLProgressBarTypeRounded)
-        {
+        if (_type == UBProgressBarTypeRounded) {
             trackHeight -= 1;
             trackWidth  -= 1;
         }
@@ -369,14 +311,12 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
     CGContextRestoreGState(context);
 }
 
-- (void)drawProgressBar:(CGContextRef)context withInnerRect:(CGRect)innerRect outterRect:(CGRect)outterRect
-{
+- (void)drawProgressBar:(CGContextRef)context withInnerRect:(CGRect)innerRect outterRect:(CGRect)outterRect {
     CGRect gradientRect = innerRect;
     
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     
-    CGContextSaveGState(context);
-    {
+    CGContextSaveGState(context); {
         UIBezierPath *progressBounds = [UIBezierPath bezierPathWithRoundedRect:innerRect cornerRadius:_internalCornerRadius];
         CGContextAddPath(context, [progressBounds CGPath]);
         CGContextClip(context);
@@ -388,8 +328,7 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
         CGFloat semi_delta = delta / 2.0f;
         CGFloat locations[colorCount];
         
-        for (NSInteger i = 0; i < colorCount; i++)
-        {
+        for (NSInteger i = 0; i < colorCount; i++) {
             locations[i] = delta * i + semi_delta;
         }
         
@@ -404,10 +343,8 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
     CGColorSpaceRelease(colorSpace);
 }
 
-- (void)drawText:(CGContextRef)context withRect:(CGRect)rect
-{
-    if (_indicatorTextLabel == nil)
-    {
+- (void)drawText:(CGContextRef)context withRect:(CGRect)rect {
+    if (_indicatorTextLabel == nil) {
         return;
     }
     
@@ -417,22 +354,19 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
     NSString *indicatorText = _indicatorTextLabel.text;
     BOOL hasText            = (_indicatorTextLabel.text != nil);
     
-    if (!hasText)
-    {
+    if (!hasText) {
         indicatorText = [NSString stringWithFormat:@"%.0f%%", (self.progress * 100)];
     }
     
     CGRect textRect = CGRectZero;
-    if ([indicatorText respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)])
-    {
+    if ([indicatorText respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)]) {
         textRect = [indicatorText boundingRectWithSize:CGRectInset(innerRect, 20, 0).size
                                                options:NSStringDrawingUsesLineFragmentOrigin
                                             attributes:@{ NSFontAttributeName: _indicatorTextLabel.font }
                                                context:nil];
     }
     
-    if (innerRect.size.width < textRect.size.width || innerRect.size.height + 4 < textRect.size.height)
-    {
+    if (innerRect.size.width < textRect.size.width || innerRect.size.height + 4 < textRect.size.height) {
         return;
     }
     
@@ -440,15 +374,12 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
     
     BOOL hasTextColor = ![_indicatorTextLabel.textColor isEqual:[UIColor clearColor]];
     
-    if (!hasTextColor)
-    {
+    if (!hasTextColor) {
         CGColorRef backgroundColor = nil;
         
-        if (_indicatorTextDisplayMode == UBProgressBarIndicatorTextDisplayModeFixCenter)
-        {
+        if (_indicatorTextDisplayMode == UBProgressBarIndicatorTextDisplayModeFixCenter) {
             backgroundColor = _trackTintColor.CGColor ?: [UIColor blackColor].CGColor;
-        } else
-        {
+        } else {
             backgroundColor = (__bridge CGColorRef)[_colors lastObject];
         }
         
@@ -460,12 +391,10 @@ const CGFloat YLProgressBarDefaultProgress = 0.3f;
     
     [_indicatorTextLabel drawTextInRect:innerRect];
     
-    if (!hasTextColor)
-    {
+    if (!hasTextColor) {
         _indicatorTextLabel.textColor = [UIColor clearColor];
     }
-    if (!hasText)
-    {
+    if (!hasText) {
         _indicatorTextLabel.text = nil;
     }
 }
