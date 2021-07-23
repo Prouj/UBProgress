@@ -109,7 +109,7 @@ const CGFloat UBProgressBarDefaultProgress = 0.3f;
     [self drawProgressBar:context withInnerRect:innerRect outterRect:rect];
     
     // Draw the indicator text if necessary
-    if (_indicatorTextDisplayMode == UBProgressBarIndicatorTextDisplayModeFixCenter) {
+    if (_indicatorTextDisplayMode == UBProgressBarIndicatorTextDisplayModeFixedCenter) {
         [self drawText:context withRect:centerRect];
     }
     
@@ -154,13 +154,6 @@ const CGFloat UBProgressBarDefaultProgress = 0.3f;
 
 - (void)setProgress:(CGFloat)progress {
     [self setProgress:progress animated:YES];
-}
-
-
-- (void)setBehavior:(UBProgressBarBehavior)behavior {
-    _behavior = behavior;
-    
-    [self setNeedsDisplay];
 }
 
 - (void)setProgressTintColor:(UIColor *)progressTintColor {
@@ -222,12 +215,17 @@ const CGFloat UBProgressBarDefaultProgress = 0.3f;
     }
 }
 
+#pragma mark - Public Methods
+
+-(void)setFont:(UIFont*_Nonnull)font {
+    _indicatorTextLabel.font = font;
+}
+
 - (void)setTypeText:(UBProgressBarIndicatorTextDisplayMode)typeText {
-    //  _type = typeText;
 
     switch (typeText) {
         case 1:
-            _indicatorTextDisplayMode = UBProgressBarIndicatorTextDisplayModeFixCenter;
+            _indicatorTextDisplayMode = UBProgressBarIndicatorTextDisplayModeFixedCenter;
             break;
         case 2:
             _indicatorTextDisplayMode = UBProgressBarIndicatorTextDisplayModeProgressRight;
@@ -257,7 +255,6 @@ const CGFloat UBProgressBarDefaultProgress = 0.3f;
 
         [_progressTargetTimer invalidate];
         _progressTargetTimer = nil;
-        
         _progress = _progressTargetValue;
     }
     [self setNeedsDisplay];
@@ -267,7 +264,6 @@ const CGFloat UBProgressBarDefaultProgress = 0.3f;
     //    _type
     _progress        = UBProgressBarDefaultProgress;
     _hideTrack       = NO;
-    _behavior        = UBProgressBarBehaviorDefault;
     _cornerRadius    = 0;
     
     _indicatorTextLabel                           = [[UILabel alloc] initWithFrame:self.frame];
@@ -377,7 +373,7 @@ const CGFloat UBProgressBarDefaultProgress = 0.3f;
     if (!hasTextColor) {
         CGColorRef backgroundColor = nil;
         
-        if (_indicatorTextDisplayMode == UBProgressBarIndicatorTextDisplayModeFixCenter) {
+        if (_indicatorTextDisplayMode == UBProgressBarIndicatorTextDisplayModeFixedCenter) {
             backgroundColor = _trackTintColor.CGColor ?: [UIColor blackColor].CGColor;
         } else {
             backgroundColor = (__bridge CGColorRef)[_colors lastObject];
