@@ -12,29 +12,43 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var progressBar: UBProgress!
     
+    @IBOutlet weak var progressBar2: UBProgress!
+    
+    @IBOutlet weak var progressBar3: UBProgress!
+    
+    @IBOutlet weak var progressBar4: UBProgress!
+    
+    @IBOutlet weak var progressBar5: UBProgress!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-//        progressBar.indicatorTextDisplayMode.
-//        progressBar.indicatorTextLabel.textColor = UIColor.red
-        progressBar.setTypeText(.fixedRight)
-        progressBar.cornerRadius = CGFloat(10)
-        progressBar.indicatorTextLabel.font = UIFont.systemFont(ofSize: 50)
+        progressBar.setTypeText(.fixedCenter)
+        progressBar.setFont(UIFont.systemFont(ofSize: 20))
         
-    }
-
-    @IBAction func testButton(_ sender: Any) {
-        let progress = progressBar.progress + 0.1
+        progressBar2.setTypeText(.fixedRight)
+        progressBar2.setFont(UIFont(name: "Chalkduster", size: 20) ?? UIFont.systemFont(ofSize: 30))
         
-        progressBar.setProgress(CGFloat(progress), animated: true)
+        progressBar3.setTypeText(.progressCenter)
+        progressBar3.setFont(UIFont(name: "Courier New", size: 20) ?? UIFont.systemFont(ofSize: 30))
         
+        progressBar4.setTypeText(.progressRight)
+        progressBar4.setFont(UIFont(name: "Arial", size: 20) ?? UIFont.systemFont(ofSize: 30))
+        
+        progressBar5.setTypeText(.none)
     }
     
-    @IBAction func menosButton(_ sender: Any) {
-        let progress = progressBar.progress - 0.1
+    @IBAction func steperButton(_ sender: UIStepper) {
         
+        let progress = sender.value/100
+        
+        print(sender.value)
         progressBar.setProgress(CGFloat(progress), animated: true)
+        progressBar2.setProgress(CGFloat(progress), animated: true)
+        progressBar3.setProgress(CGFloat(progress), animated: true)
+        progressBar4.setProgress(CGFloat(progress), animated: true)
+        progressBar5.setProgress(CGFloat(progress), animated: true)
+        
     }
 }
 

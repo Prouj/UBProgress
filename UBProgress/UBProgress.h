@@ -24,26 +24,6 @@ typedef NS_ENUM (NSUInteger, UBProgressBarType) {
     //  UBProgressBarTypeFlat    = 1,
 };
 
-// The behavior of a progress bar.
-typedef NS_ENUM (NSUInteger, UBProgressBarBehavior) {
-    /**
-     * The default behavior of a progress bar. This mode is identical to the
-     * UIProgressView.
-     */
-    UBProgressBarBehaviorDefault       = 0,
-    /**
-     * The indeterminate behavior display the stripes when the progress value is
-     * equal to 0 only. This mode is helpful when percentage is not yet known,
-     * but will be known shortly.
-     */
-    UBProgressBarBehaviorIndeterminate = 1,
-    /**
-     * The waiting behavior display the stripes when the progress value is equal
-     * to 1 only.
-     */
-    UBProgressBarBehaviorWaiting       = 2,
-};
-
 // The display mode of the indicator text.
 typedef NS_ENUM (NSUInteger, UBProgressBarIndicatorTextDisplayMode) {
 
@@ -51,7 +31,7 @@ typedef NS_ENUM (NSUInteger, UBProgressBarIndicatorTextDisplayMode) {
     UBProgressBarIndicatorTextDisplayModeNone     = 0,
 
     // The indicator text is displayed over the track bar and below the progress bar.
-    UBProgressBarIndicatorTextDisplayModeFixCenter    = 1,
+    UBProgressBarIndicatorTextDisplayModeFixedCenter    = 1,
 
     // The indicator text is diplayed over the progress bar.
     UBProgressBarIndicatorTextDisplayModeProgressRight = 2,
@@ -96,19 +76,7 @@ IB_DESIGNABLE @interface UBProgress : UIView
 
 - (void)setTypeText:(UBProgressBarIndicatorTextDisplayMode)type;
 
-#pragma mark Modifying the Progress Bar’s Behavior
-/** @name Modifying the Progress Bar’s Behavior */
-
-/**
- * @abstract The behavior of the progress bar.
- * A behavior defines how the progress bar needs to react in certain cases.
- * For example the "default" behavior of the progress bar displays the stripes
- * everytime whereas the "waiting" behavior displays them only when the
- * progress value is nearby the max value.
- *
- * @discussion The default value is YLProgressBarBehaviorDefault.
- */
-@property (nonatomic, assign) IBInspectable UBProgressBarBehavior behavior; //UI_APPEARANCE_SELECTOR;
+- (void)setFont:(UIFont*_Nonnull)font;
 
 #pragma mark Configuring the Progress Bar
 /** @name Configuring the Progress Bar */
