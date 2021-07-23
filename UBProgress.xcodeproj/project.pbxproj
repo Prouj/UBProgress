@@ -10,7 +10,67 @@
 		A4BBB10A26A7083400915064 /* UBProgress.h in Headers */ = {isa = PBXBuildFile; fileRef = A4BBB10826A7083400915064 /* UBProgress.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A4BBB11126A7088F00915064 /* UBProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BBB11026A7088F00915064 /* UBProgress.m */; };
 		A4BBB11326A709A800915064 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A4BBB11226A709A800915064 /* .gitignore */; };
+		A4BBB11B26A8487900915064 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BBB11A26A8487900915064 /* AppDelegate.swift */; };
+		A4BBB11D26A8487900915064 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BBB11C26A8487900915064 /* SceneDelegate.swift */; };
+		A4BBB11F26A8487900915064 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BBB11E26A8487900915064 /* ViewController.swift */; };
+		A4BBB12226A8487900915064 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4BBB12026A8487900915064 /* Main.storyboard */; };
+		A4BBB12426A8487C00915064 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4BBB12326A8487C00915064 /* Assets.xcassets */; };
+		A4BBB12726A8487C00915064 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4BBB12526A8487C00915064 /* LaunchScreen.storyboard */; };
+		A4BBB13426A848B800915064 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BBB13326A848B800915064 /* AppDelegate.m */; };
+		A4BBB13726A848B800915064 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BBB13626A848B800915064 /* SceneDelegate.m */; };
+		A4BBB13A26A848B800915064 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BBB13926A848B800915064 /* ViewController.m */; };
+		A4BBB13D26A848B800915064 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4BBB13B26A848B800915064 /* Main.storyboard */; };
+		A4BBB13F26A848BA00915064 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4BBB13E26A848BA00915064 /* Assets.xcassets */; };
+		A4BBB14226A848BA00915064 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4BBB14026A848BA00915064 /* LaunchScreen.storyboard */; };
+		A4BBB14526A848BA00915064 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A4BBB14426A848BA00915064 /* main.m */; };
+		A4CAD46226A85E380009E4D9 /* UBProgress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4BBB10526A7083400915064 /* UBProgress.framework */; };
+		A4CAD46326A85E380009E4D9 /* UBProgress.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A4BBB10526A7083400915064 /* UBProgress.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A4CAD46726A85E410009E4D9 /* UBProgress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4BBB10526A7083400915064 /* UBProgress.framework */; };
+		A4CAD46826A85E410009E4D9 /* UBProgress.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A4BBB10526A7083400915064 /* UBProgress.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A4CAD46D26A85FE00009E4D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4BBB12026A8487900915064 /* Main.storyboard */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A4CAD46426A85E380009E4D9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A4BBB0FC26A7083400915064 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A4BBB10426A7083400915064;
+			remoteInfo = UBProgress;
+		};
+		A4CAD46926A85E410009E4D9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A4BBB0FC26A7083400915064 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A4BBB10426A7083400915064;
+			remoteInfo = UBProgress;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A4CAD46626A85E380009E4D9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A4CAD46326A85E380009E4D9 /* UBProgress.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4CAD46B26A85E410009E4D9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A4CAD46826A85E410009E4D9 /* UBProgress.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A4BBB10526A7083400915064 /* UBProgress.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UBProgress.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -18,6 +78,26 @@
 		A4BBB10926A7083400915064 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A4BBB11026A7088F00915064 /* UBProgress.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UBProgress.m; sourceTree = "<group>"; };
 		A4BBB11226A709A800915064 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		A4BBB11826A8487900915064 /* UBProgressSampleSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UBProgressSampleSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4BBB11A26A8487900915064 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A4BBB11C26A8487900915064 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		A4BBB11E26A8487900915064 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A4BBB12126A8487900915064 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A4BBB12326A8487C00915064 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A4BBB12626A8487C00915064 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A4BBB12826A8487C00915064 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A4BBB13026A848B800915064 /* UBProgressSampleObjC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UBProgressSampleObjC.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4BBB13226A848B800915064 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		A4BBB13326A848B800915064 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A4BBB13526A848B800915064 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		A4BBB13626A848B800915064 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		A4BBB13826A848B800915064 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		A4BBB13926A848B800915064 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		A4BBB13C26A848B800915064 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A4BBB13E26A848BA00915064 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A4BBB14126A848BA00915064 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A4BBB14326A848BA00915064 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A4BBB14426A848BA00915064 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -25,6 +105,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4BBB11526A8487900915064 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4CAD46226A85E380009E4D9 /* UBProgress.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4BBB12D26A848B800915064 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4CAD46726A85E410009E4D9 /* UBProgress.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -36,7 +132,10 @@
 			children = (
 				A4BBB11226A709A800915064 /* .gitignore */,
 				A4BBB10726A7083400915064 /* UBProgress */,
+				A4BBB11926A8487900915064 /* UBProgressSampleSwift */,
+				A4BBB13126A848B800915064 /* UBProgressSampleObjC */,
 				A4BBB10626A7083400915064 /* Products */,
+				A4CAD46126A85E380009E4D9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -44,6 +143,8 @@
 			isa = PBXGroup;
 			children = (
 				A4BBB10526A7083400915064 /* UBProgress.framework */,
+				A4BBB11826A8487900915064 /* UBProgressSampleSwift.app */,
+				A4BBB13026A848B800915064 /* UBProgressSampleObjC.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -56,6 +157,45 @@
 				A4BBB10926A7083400915064 /* Info.plist */,
 			);
 			path = UBProgress;
+			sourceTree = "<group>";
+		};
+		A4BBB11926A8487900915064 /* UBProgressSampleSwift */ = {
+			isa = PBXGroup;
+			children = (
+				A4BBB11A26A8487900915064 /* AppDelegate.swift */,
+				A4BBB11C26A8487900915064 /* SceneDelegate.swift */,
+				A4BBB11E26A8487900915064 /* ViewController.swift */,
+				A4BBB12026A8487900915064 /* Main.storyboard */,
+				A4BBB12326A8487C00915064 /* Assets.xcassets */,
+				A4BBB12526A8487C00915064 /* LaunchScreen.storyboard */,
+				A4BBB12826A8487C00915064 /* Info.plist */,
+			);
+			path = UBProgressSampleSwift;
+			sourceTree = "<group>";
+		};
+		A4BBB13126A848B800915064 /* UBProgressSampleObjC */ = {
+			isa = PBXGroup;
+			children = (
+				A4BBB13226A848B800915064 /* AppDelegate.h */,
+				A4BBB13326A848B800915064 /* AppDelegate.m */,
+				A4BBB13526A848B800915064 /* SceneDelegate.h */,
+				A4BBB13626A848B800915064 /* SceneDelegate.m */,
+				A4BBB13826A848B800915064 /* ViewController.h */,
+				A4BBB13926A848B800915064 /* ViewController.m */,
+				A4BBB13B26A848B800915064 /* Main.storyboard */,
+				A4BBB13E26A848BA00915064 /* Assets.xcassets */,
+				A4BBB14026A848BA00915064 /* LaunchScreen.storyboard */,
+				A4BBB14326A848BA00915064 /* Info.plist */,
+				A4BBB14426A848BA00915064 /* main.m */,
+			);
+			path = UBProgressSampleObjC;
+			sourceTree = "<group>";
+		};
+		A4CAD46126A85E380009E4D9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -90,15 +230,60 @@
 			productReference = A4BBB10526A7083400915064 /* UBProgress.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		A4BBB11726A8487900915064 /* UBProgressSampleSwift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A4BBB12B26A8487C00915064 /* Build configuration list for PBXNativeTarget "UBProgressSampleSwift" */;
+			buildPhases = (
+				A4BBB11426A8487900915064 /* Sources */,
+				A4BBB11526A8487900915064 /* Frameworks */,
+				A4BBB11626A8487900915064 /* Resources */,
+				A4CAD46626A85E380009E4D9 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A4CAD46526A85E380009E4D9 /* PBXTargetDependency */,
+			);
+			name = UBProgressSampleSwift;
+			productName = UBProgressSampleSwift;
+			productReference = A4BBB11826A8487900915064 /* UBProgressSampleSwift.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A4BBB12F26A848B800915064 /* UBProgressSampleObjC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A4BBB14626A848BA00915064 /* Build configuration list for PBXNativeTarget "UBProgressSampleObjC" */;
+			buildPhases = (
+				A4BBB12C26A848B800915064 /* Sources */,
+				A4BBB12D26A848B800915064 /* Frameworks */,
+				A4BBB12E26A848B800915064 /* Resources */,
+				A4CAD46B26A85E410009E4D9 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A4CAD46A26A85E410009E4D9 /* PBXTargetDependency */,
+			);
+			name = UBProgressSampleObjC;
+			productName = UBProgressSampleObjC;
+			productReference = A4BBB13026A848B800915064 /* UBProgressSampleObjC.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		A4BBB0FC26A7083400915064 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					A4BBB10426A7083400915064 = {
+						CreatedOnToolsVersion = 12.5;
+					};
+					A4BBB11726A8487900915064 = {
+						CreatedOnToolsVersion = 12.5;
+					};
+					A4BBB12F26A848B800915064 = {
 						CreatedOnToolsVersion = 12.5;
 					};
 				};
@@ -117,6 +302,8 @@
 			projectRoot = "";
 			targets = (
 				A4BBB10426A7083400915064 /* UBProgress */,
+				A4BBB11726A8487900915064 /* UBProgressSampleSwift */,
+				A4BBB12F26A848B800915064 /* UBProgressSampleObjC */,
 			);
 		};
 /* End PBXProject section */
@@ -127,6 +314,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4BBB11326A709A800915064 /* .gitignore in Resources */,
+				A4CAD46D26A85FE00009E4D9 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4BBB11626A8487900915064 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4BBB12726A8487C00915064 /* LaunchScreen.storyboard in Resources */,
+				A4BBB12426A8487C00915064 /* Assets.xcassets in Resources */,
+				A4BBB12226A8487900915064 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4BBB12E26A848B800915064 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4BBB14226A848BA00915064 /* LaunchScreen.storyboard in Resources */,
+				A4BBB13F26A848BA00915064 /* Assets.xcassets in Resources */,
+				A4BBB13D26A848B800915064 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,7 +349,76 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A4BBB11426A8487900915064 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4BBB11F26A8487900915064 /* ViewController.swift in Sources */,
+				A4BBB11B26A8487900915064 /* AppDelegate.swift in Sources */,
+				A4BBB11D26A8487900915064 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4BBB12C26A848B800915064 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4BBB13A26A848B800915064 /* ViewController.m in Sources */,
+				A4BBB13426A848B800915064 /* AppDelegate.m in Sources */,
+				A4BBB14526A848BA00915064 /* main.m in Sources */,
+				A4BBB13726A848B800915064 /* SceneDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A4CAD46526A85E380009E4D9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A4BBB10426A7083400915064 /* UBProgress */;
+			targetProxy = A4CAD46426A85E380009E4D9 /* PBXContainerItemProxy */;
+		};
+		A4CAD46A26A85E410009E4D9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A4BBB10426A7083400915064 /* UBProgress */;
+			targetProxy = A4CAD46926A85E410009E4D9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A4BBB12026A8487900915064 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A4BBB12126A8487900915064 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A4BBB12526A8487C00915064 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A4BBB12626A8487C00915064 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		A4BBB13B26A848B800915064 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A4BBB13C26A848B800915064 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A4BBB14026A848BA00915064 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A4BBB14126A848BA00915064 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		A4BBB10B26A7083400915064 /* Debug */ = {
@@ -308,6 +585,84 @@
 			};
 			name = Release;
 		};
+		A4BBB12926A8487C00915064 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y8XB2TQUP3;
+				INFOPLIST_FILE = UBProgressSampleSwift/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = PauloUchoa.UBProgressSampleSwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A4BBB12A26A8487C00915064 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y8XB2TQUP3;
+				INFOPLIST_FILE = UBProgressSampleSwift/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = PauloUchoa.UBProgressSampleSwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A4BBB14726A848BA00915064 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y8XB2TQUP3;
+				INFOPLIST_FILE = UBProgressSampleObjC/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = PauloUchoa.UBProgressSampleObjC;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A4BBB14826A848BA00915064 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Y8XB2TQUP3;
+				INFOPLIST_FILE = UBProgressSampleObjC/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = PauloUchoa.UBProgressSampleObjC;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -325,6 +680,24 @@
 			buildConfigurations = (
 				A4BBB10E26A7083400915064 /* Debug */,
 				A4BBB10F26A7083400915064 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A4BBB12B26A8487C00915064 /* Build configuration list for PBXNativeTarget "UBProgressSampleSwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A4BBB12926A8487C00915064 /* Debug */,
+				A4BBB12A26A8487C00915064 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A4BBB14626A848BA00915064 /* Build configuration list for PBXNativeTarget "UBProgressSampleObjC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A4BBB14726A848BA00915064 /* Debug */,
+				A4BBB14826A848BA00915064 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
