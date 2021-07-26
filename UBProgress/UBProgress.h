@@ -17,11 +17,11 @@ typedef NS_ENUM (NSUInteger, UBProgressBarType) {
 
     // The progress bar has rounded corners.
 
-    UBProgressBarTypeRounded = 0,
+    UBProgressBarTypeCircle = 0,
 
-    // The progress bar has squared corners.
+//     The progress bar has squared corners.
 
-    //  UBProgressBarTypeFlat    = 1,
+    UBProgressBarTypeInLine = 1,
 };
 
 // The display mode of the indicator text.
@@ -78,6 +78,10 @@ IB_DESIGNABLE @interface UBProgress : UIView
 
 - (void)setFont:(UIFont*_Nonnull)font;
 
+- (void)setTypeForm:(UBProgressBarType)typeProgress;
+
+- (void)setLabelColor:(UIColor*_Nonnull)textColor;
+
 #pragma mark Configuring the Progress Bar
 /** @name Configuring the Progress Bar */
 /**
@@ -86,6 +90,11 @@ IB_DESIGNABLE @interface UBProgress : UIView
  * @discussion All the colors in the array are drawn as a gradient
  * visual of equal size.
  */
+
+@property (nonatomic, assign) IBInspectable CGFloat rotationAngle;
+
+@property (nonatomic, assign) IBInspectable CGFloat angle;
+
 @property (nonatomic, strong, nonnull) NSArray *progressTintColors; //UI_APPEARANCE_SELECTOR;
 
 /**
@@ -106,13 +115,18 @@ IB_DESIGNABLE @interface UBProgress : UIView
  */
 @property (nonatomic, assign) IBInspectable CGFloat progressBarInset; //UI_APPEARANCE_SELECTOR;
 
+
+@property (nonatomic,assign) IBInspectable CGFloat backLineWidth;
+
 /**
  * @abstract The type of the progress bar.
  * @discussion The default value is set to `YLProgressBarTypeRounded`. The corner
  * radius can be configured through the `cornerRadius` property.
  */
-@property (nonatomic, assign) IBInspectable UBProgressBarType type; //UI_APPEARANCE_SELECTOR;
+//@property (nonatomic, assign) IBInspectable UBProgressBarType type; //UI_APPEARANCE_SELECTOR;
 
+
+@property (nonatomic, assign) IBInspectable UBProgressBarType typeProgress;
 /**
  * @abstract The corner radius of the progress bar.
  * @discussion The default value is 0. It means that the corner radius is equal

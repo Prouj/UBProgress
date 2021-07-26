@@ -17,10 +17,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ug8-EJ-GoR" customClass="UBProgress">
-                                <rect key="frame" x="57" y="393" width="300" height="30"/>
+                                <rect key="frame" x="57" y="323" width="300" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="aN7-Ff-qhF"/>
-                                    <constraint firstAttribute="height" constant="30" id="xPw-QU-6UO"/>
+                                    <constraint firstAttribute="height" constant="100" id="xPw-QU-6UO"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="progressTintColor">
@@ -37,9 +37,6 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="uniformTintColor" value="NO"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="hideInnerWhiteShadow" value="NO"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="hideTrack" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="progressBarInset">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" stepValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="QKE-MQ-vug">
@@ -74,6 +71,7 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="progressBarInset">
                                         <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="hideTrack" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zEd-Iv-NsC" customClass="UBProgress">

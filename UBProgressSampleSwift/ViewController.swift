@@ -24,6 +24,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         progressBar.setTypeText(.fixedCenter)
+        progressBar.setTypeForm(.circle)
+        progressBar.backLineWidth = 10
+        progressBar.setLabel(.blue)
+        progressBar.angle = 10
+        progressBar.rotationAngle = 60
         progressBar.setFont(UIFont.systemFont(ofSize: 20))
         
         progressBar2.setTypeText(.fixedRight)
