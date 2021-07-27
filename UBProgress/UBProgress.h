@@ -11,40 +11,80 @@
 #import <UIKit/UIKit.h>
 
 
-// The progress bar appearance.
+// The progress bar type.
 
 typedef NS_ENUM (NSUInteger, UBProgressBarType) {
 
-    // The progress bar has rounded corners.
+    // The progress bar is a circle.
 
-    UBProgressBarTypeRounded = 0,
+    UBProgressBarTypeCircle = 0,
 
-    // The progress bar has squared corners.
+//     The progress bar is a line.
 
-    //  UBProgressBarTypeFlat    = 1,
+    UBProgressBarTypeInLine = 1
 };
 
 // The display mode of the indicator text.
 typedef NS_ENUM (NSUInteger, UBProgressBarIndicatorTextDisplayMode) {
 
     // The indicator text is not displayed.
-    UBProgressBarIndicatorTextDisplayModeNone     = 0,
+    UBProgressBarIndicatorTextDisplayModeNone = 0,
 
-    // The indicator text is displayed over the track bar and below the progress bar.
-    UBProgressBarIndicatorTextDisplayModeFixedCenter    = 1,
+    // The indicator text is displayed over the background bar fixed in center.
+    UBProgressBarIndicatorTextDisplayModeFixedCenter = 1,
 
     // The indicator text is diplayed over the progress bar.
     UBProgressBarIndicatorTextDisplayModeProgressRight = 2,
     
-    //
+    // The indicator text is displayed over the background bar and over the progress bar in the center.
     UBProgressBarIndicatorTextDisplayModeProgressCenter = 3,
 
-    // The indicator text is displayed over the track bar and over the progress bar in the right.
+    // The indicator text is displayed over the background bar and over the progress bar in the right.
     UBProgressBarIndicatorTextDisplayModeFixedRight = 4
 };
 
 
 IB_DESIGNABLE @interface UBProgress : UIView
+
+
+#pragma mark Methods
+
+/**
+ * @abstract Set the progress value.
+ * @discussion Set the current progress value, which is represented by a floating-point value
+ * between 0.0 and 1.0.
+ */
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
+
+/**
+ * @abstract Set the text display mode that is currently being presented.
+ * @discussion The default value is set to `UBProgesssBarIndicatorDisplayModeNone`. The only mode that works with the Circle Progress is the  'UBProgressBarIndicatorTextDisplayModeFixedCenter' */
+- (void)setTypeText:(UBProgressBarIndicatorTextDisplayMode)type;
+
+/**
+ * @abstract Set the text font.
+ * @discussion The default value is set to 'System' , if you want to change the font weight and size, you need to pass an UIFont with weight and size */
+- (void)setFont:(UIFont*_Nonnull)font;
+
+/**
+ * @abstract Set the form of the progress.
+ * @discussion The default value is set to 'inLine'. */
+- (void)setTypeForm:(UBProgressBarType)typeProgress;
+
+/**
+ * @abstract Set the progressBar color.
+ * @discussion The default value is set to 'white' , if you want to change the background color use the 'setBackgroundTintColor' */
+- (void)setProgressTintColor:(UIColor *_Nonnull)progressTintColor;
+
+/**
+ * @abstract Set the background color.
+ * @discussion The default value is set to 'black' , if you want to change the progressBar color use the 'setProgressTintColor' */
+- (void)setBackgroundTintColor:(UIColor * _Nonnull)backgroundTintColor;
+
+/**
+ * @abstract Set the text color.
+ * @discussion The default value is set to 'Black or white' depend of the background and progress colors.*/
+- (void)setLabelTextColor:(UIColor*_Nonnull)textColor;
 
 #pragma mark Managing the Progress Bar
 /** @name Managing the Progress Bar */
@@ -54,39 +94,21 @@ IB_DESIGNABLE @interface UBProgress : UIView
  * @discussion The current progress is represented by a floating-point value
  * between 0.0 and 1.0, inclusive, where 1.0 indicates the completion of the
  * task.
- *
- * The default value is 0.3. Values less than 0.0 and greater than 1.0 are
- * pinned to those limits.
  */
 @property (atomic, assign) IBInspectable CGFloat progress;
 
-/**
- * @abstract Adjusts the current progress shown by the receiver, optionally
- * animating the change.
- * @param progress The new progress value.
- * @param animated YES if the change should be animated, NO if the change should
- * happen immediately.
- * @discussion The current progress is represented by a floating-point value
- * between 0.0 and 1.0, inclusive, where 1.0 indicates the completion of the
- * task.
- * The default value is 0.0. Values less than 0.0 and greater than 1.0 are
- * pinned to those limits.
- */
-- (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
-
-- (void)setTypeText:(UBProgressBarIndicatorTextDisplayMode)type;
-
-- (void)setFont:(UIFont*_Nonnull)font;
-
 #pragma mark Configuring the Progress Bar
 /** @name Configuring the Progress Bar */
+
 /**
- * @abstract The colors shown for the portion of the progress bar
- * that is filled.
- * @discussion All the colors in the array are drawn as a gradient
- * visual of equal size.
- */
-@property (nonatomic, strong, nonnull) NSArray *progressTintColors; //UI_APPEARANCE_SELECTOR;
+ * @abstract This property define the rotation angle of the progress.
+ * @discussion The default value is set to '0' and it is possible to choose a value between 0 and 100. This property change the local where progress will begin. */
+@property (nonatomic, assign) IBInspectable CGFloat rotationAngle;
+
+/**
+ * @abstract This property define the range angle of the progress.
+ * @discussion The default value is set to '100' and it is possible to choose a value between 0 and 100. */
+@property (nonatomic, assign) IBInspectable CGFloat angle;
 
 /**
  * @abstract The color shown for the portion of the progress bar that is filled.
@@ -96,57 +118,40 @@ IB_DESIGNABLE @interface UBProgress : UIView
 /**
  * @abstract The color shown for the portion of the progress bar that is not
  * filled.
- */
-@property (nonatomic, strong, nonnull) IBInspectable UIColor *trackTintColor; //UI_APPEARANCE_SELECTOR;
+ * @discussion The default value is set to 'black' , if you want to change the progressBar color use the 'setProgressTintColor'*/
+@property (nonatomic, strong, nonnull) IBInspectable UIColor *backgroundTintColor; //UI_APPEARANCE_SELECTOR;
 
 /**
  * @abstract A CGFloat value that determines the inset between the track and the
  * progressBar for the rounded progress bar type.
- * @discussion The default value is 1px.
+ * @discussion The default value is 0px.
  */
 @property (nonatomic, assign) IBInspectable CGFloat progressBarInset; //UI_APPEARANCE_SELECTOR;
 
+
 /**
- * @abstract The type of the progress bar.
- * @discussion The default value is set to `YLProgressBarTypeRounded`. The corner
- * radius can be configured through the `cornerRadius` property.
+ * @abstract A CGFloat value that determines the width of the Circle progressBar
+ * @discussion The default value is 5.
  */
-@property (nonatomic, assign) IBInspectable UBProgressBarType type; //UI_APPEARANCE_SELECTOR;
+@property (nonatomic,assign) IBInspectable CGFloat circleProgressWidth;
+
+/**
+ * @abstract The form of the progress.
+ * @discussion The default value is set to 'inLine'. */
+@property (nonatomic, assign) IBInspectable UBProgressBarType typeProgress;
 
 /**
  * @abstract The corner radius of the progress bar.
- * @discussion The default value is 0. It means that the corner radius is equal
- * to the half of the height.
+ * @discussion The default value is 0.
  */
 @property (nonatomic, assign) IBInspectable CGFloat cornerRadius; //UI_APPEARANCE_SELECTOR;
 
-#pragma mark Displaying Text
-/** @name Displaying Text */
-
 /**
- * @abstract A label to display some indications for the user.
- * When the label text is set to nil it shows the progress value as a percentage
- * You can configure its font color, the font size, the text alignement, etc. as
- * any other labels.
- * @discussion By default the label text is set to nil and its text color change
- * using the background color.
+ * @abstract A Boolean value that determines whether the background is hidden.
+ * @discussion Setting the value of this property to YES hides the background and
+ * setting it to NO shows the background. The default value is NO.
  */
-@property (nonatomic, strong, nonnull) UILabel *indicatorTextLabel;
-
-/**
- * @abstract The display indicator text mode. It defines where the indicator
- * text needs to display.
- * @discussion The default value is set to
- * `YLProgressBarIndicatorTextDisplayModeNone`.
- */
-@property (nonatomic, assign) IBInspectable UBProgressBarIndicatorTextDisplayMode indicatorTextDisplayMode; //UI_APPEARANCE_SELECTOR;
-
-/**
- * @abstract A Boolean value that determines whether the track is hidden.
- * @discussion Setting the value of this property to YES hides the track and
- * setting it to NO shows the track. The default value is NO.
- */
-@property (nonatomic, assign) IBInspectable BOOL hideTrack;
+@property (nonatomic, assign) IBInspectable BOOL hideBackground;
 
 @end
 
