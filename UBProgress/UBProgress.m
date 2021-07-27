@@ -9,7 +9,7 @@
 #import "UBProgress.h"
 
 // Sizes
-const NSInteger UBProgressBarDefaultSizeInset = 1; //px
+const NSInteger UBProgressBarDefaultSizeInset = 0; //px
 
 // Animation times
 const NSTimeInterval UBProgressBarProgressTime = 0.25f; // s
@@ -22,6 +22,9 @@ const CGFloat UBProgressBarDefaultProgress = 0.3f;
 @property (nonatomic, strong) NSArray *colors;
 @property (nonatomic, strong) NSTimer *progressTargetTimer;
 @property (nonatomic, assign) CGFloat progressTargetValue;
+@property (nonatomic, strong, nonnull) IBInspectable UILabel *indicatorTextLabel;
+@property (nonatomic, assign) IBInspectable UBProgressBarIndicatorTextDisplayMode indicatorTextDisplayMode;
+@property (nonatomic, strong, nonnull) NSArray *progressTintColors;
 
 // Init the progress bar with the default values.
 - (void)initializeProgressBar;
@@ -29,16 +32,26 @@ const CGFloat UBProgressBarDefaultProgress = 0.3f;
 // Draw the background (track) of the slider.
 - (void)drawBackground:(CGContextRef)context withRect:(CGRect)rect;
 
+- (void)drawBackgroundInLine:(CGContextRef)context withRect:(CGRect)rect;
+
+- (void)drawBackgroundInCircle:(CGContextRef)context withRect:(CGRect)rect;
+
 // Draw the progress bar.
 - (void)drawProgressBar:(CGContextRef)context withInnerRect:(CGRect)innerRect outterRect:(CGRect)outterRect;
+
+- (void)drawProgressBarInLine:(CGContextRef)context withInnerRect:(CGRect)innerRect outterRect:(CGRect)outterRect;
+
+- (void)drawProgressBarInCircle:(CGRect)rect context:(CGContextRef)context;
 
 // Draw the given text into the given location of the rect.
 - (void)drawText:(CGContextRef)context withRect:(CGRect)rect;
 
+- (void)drawRect:(CGRect)rect;
+
 // Callback for the setProgress:Animated: animation timer.
 - (void)updateProgressWithTimer:(NSTimer *)timer;
 
-- (void)setType:(UBProgressBarType)type;
+- (void)setProgressTintColors:(NSArray *)progressTintColors;
 
 @end
 
@@ -75,64 +88,6 @@ const CGFloat UBProgressBarDefaultProgress = 0.3f;
     }
 }
 
-- (void)drawRect:(CGRect)rect {
-    if (self.isHidden) {
-        return;
-    }
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    // Refresh the corner radius value
-    self.internalCornerRadius = 0;
-
-    if (_cornerRadius > 0) {
-        self.internalCornerRadius = _cornerRadius;
-    }
-    // Draw the background track
-    if (!_hideTrack) {
-        [self drawBackground:context withRect:rect];
-    }
-    
-    // Compute the inner rectangle
-    CGRect innerRect;
-    
-    innerRect = CGRectMake(_progressBarInset,
-                           _progressBarInset,
-                           CGRectGetWidth(rect) * self.progress - 2 * _progressBarInset,
-                           CGRectGetHeight(rect) - 2 * _progressBarInset);
-    
-    CGRect centerRect;
-    
-    centerRect = CGRectMake(0,
-                            0,
-                            CGRectGetWidth(rect),
-                            CGRectGetHeight(rect));
-
-    [self drawProgressBar:context withInnerRect:innerRect outterRect:rect];
-    
-    // Draw the indicator text if necessary
-    if (_indicatorTextDisplayMode == UBProgressBarIndicatorTextDisplayModeFixedCenter) {
-        [self drawText:context withRect:centerRect];
-    }
-    
-    // Draw the indicator text if necessary
-    if (_indicatorTextDisplayMode == UBProgressBarIndicatorTextDisplayModeProgressRight) {
-        [self drawText:context withRect:innerRect];
-        _indicatorTextLabel.textAlignment = NSTextAlignmentRight;
-    }
-
-    // Draw the indicator text if necessary
-    if (_indicatorTextDisplayMode == UBProgressBarIndicatorTextDisplayModeProgressCenter) {
-        [self drawText:context withRect:innerRect];
-    }
-    
-    // Draw the indicator text if necessary
-    if (_indicatorTextDisplayMode == UBProgressBarIndicatorTextDisplayModeFixedRight) {
-        [self drawText:context withRect:rect];
-        _indicatorTextLabel.textAlignment = NSTextAlignmentRight;
-    }
-}
-
 #pragma mark - Properties
 
 - (CGFloat)progress {
@@ -141,37 +96,7 @@ const CGFloat UBProgressBarDefaultProgress = 0.3f;
     }
 }
 
-- (void)setProgress:(CGFloat)progress {
-    [self setProgress:progress animated:YES];
-}
-
-- (void)setProgressTintColor:(UIColor *)progressTintColor {
-    progressTintColor  = (progressTintColor) ? progressTintColor : [UIColor blueColor];
-    _progressTintColor = progressTintColor;
-    
-    [self setProgressTintColors:@[_progressTintColor, _progressTintColor]];
-}
-
-- (void)setProgressTintColors:(NSArray *)progressTintColors {
-    NSAssert(progressTintColors, @"progressTintColors must not be null");
-    NSAssert([progressTintColors count], @"progressTintColors must contain at least one element");
-
-    if (_progressTintColors != progressTintColors) {
-        _progressTintColors = progressTintColors;
-    }
-
-    NSMutableArray *colors  = [NSMutableArray arrayWithCapacity:[progressTintColors count]];
-    for (UIColor *color in progressTintColors) {
-        [colors addObject:(id)color.CGColor];
-    }
-    self.colors = colors;
-}
-
 #pragma mark - Public Methods
-
--(void)setLabelColor:(UIColor*)textColor {
-    _indicatorTextLabel.textColor = textColor;
-}
 
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated {
     @synchronized (self) {
@@ -223,8 +148,6 @@ const CGFloat UBProgressBarDefaultProgress = 0.3f;
   }
 }
 
-#pragma mark - Public Methods
-
 -(void)setFont:(UIFont*_Nonnull)font {
     _indicatorTextLabel.font = font;
 }
@@ -262,6 +185,22 @@ const CGFloat UBProgressBarDefaultProgress = 0.3f;
     }
 }
 
+-(void)setLabelTextColor:(UIColor*)textColor {
+    _indicatorTextLabel.textColor = textColor;
+}
+
+
+- (void)setProgressTintColor:(UIColor *)progressTintColor {
+    progressTintColor  = (progressTintColor) ? progressTintColor : [UIColor blueColor];
+    _progressTintColor = progressTintColor;
+    
+    [self setProgressTintColors:@[_progressTintColor, _progressTintColor]];
+}
+
+- (void)setBackgroundTintColor:(UIColor *)backgroundTintColor {
+    backgroundTintColor  = (backgroundTintColor) ? backgroundTintColor : [UIColor blueColor];
+    _backgroundTintColor = backgroundTintColor;
+}
 
 #pragma mark - Private Methods
 
@@ -280,46 +219,18 @@ const CGFloat UBProgressBarDefaultProgress = 0.3f;
     [self setNeedsDisplay];
 }
 
-- (void)initializeProgressBar {
-    //    _type
-    _progress        = UBProgressBarDefaultProgress;
-    _hideTrack       = NO;
-    _cornerRadius    = 0;
-    
-    _indicatorTextLabel                           = [[UILabel alloc] initWithFrame:self.frame];
-    _indicatorTextLabel.adjustsFontSizeToFitWidth = YES;
-    _indicatorTextLabel.backgroundColor           = [UIColor clearColor];
-    _indicatorTextLabel.lineBreakMode             = NSLineBreakByTruncatingHead;
-    _indicatorTextLabel.font = [UIFont fontWithName: @"System" size: 20];
-    _indicatorTextLabel.textAlignment             = NSTextAlignmentCenter;
-    _indicatorTextLabel.textColor                 = [UIColor clearColor];
-    _indicatorTextLabel.minimumScaleFactor        = 3;
-    
-    _indicatorTextDisplayMode = UBProgressBarIndicatorTextDisplayModeNone;
-    _typeProgress = UBProgressBarTypeInLine;
-    
-    _angle = 100.f;
-    _rotationAngle = 0.f;
-    
-    self.trackTintColor           = [UIColor blackColor];
-    self.progressTintColor        = self.backgroundColor;
-    self.progressBarInset         = UBProgressBarDefaultSizeInset;
-    self.backgroundColor          = [UIColor clearColor];
-}
-
-
 - (void)drawBackground:(CGContextRef)context withRect:(CGRect)rect {
     
     if (_typeProgress == UBProgressBarTypeCircle) {
-        [self drawAllBackgroundInCircle:context withRect:rect];
+        [self drawBackgroundInCircle:context withRect:rect];
         
     } else {
-        [self drawAllBackgroundInLine:context withRect:rect];
+        [self drawBackgroundInLine:context withRect:rect];
     }
     
 }
 
-- (void)drawAllBackgroundInLine:(CGContextRef)context withRect:(CGRect)rect  {
+- (void)drawBackgroundInLine:(CGContextRef)context withRect:(CGRect)rect  {
     // Define the progress bar pattern to clip all the content inside
     UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, CGRectGetWidth(rect), CGRectGetHeight(rect))
     cornerRadius:_internalCornerRadius];
@@ -331,19 +242,19 @@ const CGFloat UBProgressBarDefaultProgress = 0.3f;
         
         // Draw the track
         UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, trackWidth, trackHeight) cornerRadius:_internalCornerRadius];
-        [_trackTintColor set];
+        [_backgroundTintColor set];
         [roundedRect fill];
     }
     CGContextRestoreGState(context);
     
 }
 
-- (void)drawAllBackgroundInCircle:(CGContextRef)context withRect:(CGRect)rect  {
+- (void)drawBackgroundInCircle:(CGContextRef)context withRect:(CGRect)rect  {
     
     CGPoint center = {CGRectGetMidX(rect), CGRectGetMidY(rect)};
-    CGFloat radius = (MIN(CGRectGetWidth(rect), CGRectGetHeight(rect))/2)- self.backLineWidth;
+    CGFloat radius = (MIN(CGRectGetWidth(rect), CGRectGetHeight(rect))/2)- self.circleProgressWidth;
     
-    radius = radius - self.backLineWidth/2.f;
+    radius = radius - self.circleProgressWidth/2.f;
     
     UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, CGRectGetWidth(rect), CGRectGetHeight(rect))
     cornerRadius:_internalCornerRadius];
@@ -358,15 +269,15 @@ const CGFloat UBProgressBarDefaultProgress = 0.3f;
     
     CGPathRef strokedArc =
       CGPathCreateCopyByStrokingPath(arc, NULL,
-                                     self.backLineWidth,
+                                     self.circleProgressWidth,
                                      (CGLineCap)kCGLineCapRound,
                                      kCGLineJoinMiter,
                                      10);
       
       
       CGContextAddPath(context, strokedArc);
-      CGContextSetStrokeColorWithColor(context, self.trackTintColor.CGColor);
-      CGContextSetFillColorWithColor(context, self.trackTintColor.CGColor);
+      CGContextSetStrokeColorWithColor(context, self.backgroundTintColor.CGColor);
+      CGContextSetFillColorWithColor(context, self.backgroundTintColor.CGColor);
       CGContextDrawPath(context, kCGPathFillStroke);
       
       CGPathRelease(arc);
@@ -382,12 +293,12 @@ const CGFloat UBProgressBarDefaultProgress = 0.3f;
     }
 }
 
-- (void)drawProgressBarInCircle:(CGRect)rect context:(CGContextRef)context{
+- (void)drawProgressBarInCircle:(CGRect)rect context:(CGContextRef)context {
     
     CGPoint center = {CGRectGetMidX(rect), CGRectGetMidY(rect)};
-    CGFloat radius = (MIN(CGRectGetWidth(rect), CGRectGetHeight(rect))/2) - self.backLineWidth;
+    CGFloat radius = (MIN(CGRectGetWidth(rect), CGRectGetHeight(rect))/2) - self.circleProgressWidth;
     
-    radius = radius - self.backLineWidth/2.f;
+    radius = radius - self.circleProgressWidth/2.f;
     
     CGMutablePathRef arc = CGPathCreateMutable();
     CGPathAddArc(arc, NULL,
@@ -398,7 +309,7 @@ const CGFloat UBProgressBarDefaultProgress = 0.3f;
     
     CGPathRef strokedArc =
     CGPathCreateCopyByStrokingPath(arc, NULL,
-                                   self.backLineWidth,
+                                   self.circleProgressWidth,
                                    (CGLineCap)kCGLineCapRound,
                                    kCGLineJoinMiter,
                                    10);
@@ -480,7 +391,7 @@ const CGFloat UBProgressBarDefaultProgress = 0.3f;
         CGColorRef backgroundColor = nil;
 
         if (_indicatorTextDisplayMode == UBProgressBarIndicatorTextDisplayModeFixedCenter) {
-            backgroundColor = _trackTintColor.CGColor ?: [UIColor blackColor].CGColor;
+            backgroundColor = _backgroundTintColor.CGColor ?: [UIColor blackColor].CGColor;
         } else {
             backgroundColor = (__bridge CGColorRef)[_colors lastObject];
         }
@@ -501,14 +412,105 @@ const CGFloat UBProgressBarDefaultProgress = 0.3f;
     }
 }
 
-#pragma mark - KVO Delegate Methods
+- (void)drawRect:(CGRect)rect {
+    if (self.isHidden) {
+        return;
+    }
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    // Refresh the corner radius value
+    self.internalCornerRadius = 0;
 
-//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-//{
-//  if ([keyPath isEqualToString:@"hideStripes"] || [keyPath isEqualToString:@"stripesAnimated"])
-//  {
-//    [self updateStripesTimer];
-//  }
-//}
+    if (_cornerRadius > 0) {
+        self.internalCornerRadius = _cornerRadius;
+    }
+    // Draw the background track
+    if (!_hideBackground) {
+        [self drawBackground:context withRect:rect];
+    }
+    
+    // Compute the inner rectangle
+    CGRect innerRect;
+    
+    innerRect = CGRectMake(_progressBarInset,
+                           _progressBarInset,
+                           CGRectGetWidth(rect) * self.progress - 2 * _progressBarInset,
+                           CGRectGetHeight(rect) - 2 * _progressBarInset);
+    
+    CGRect centerRect;
+    
+    centerRect = CGRectMake(0,
+                            0,
+                            CGRectGetWidth(rect),
+                            CGRectGetHeight(rect));
+
+    [self drawProgressBar:context withInnerRect:innerRect outterRect:rect];
+    
+    // Draw the indicator text if necessary
+    if (_indicatorTextDisplayMode == UBProgressBarIndicatorTextDisplayModeFixedCenter) {
+        [self drawText:context withRect:centerRect];
+    }
+    
+    // Draw the indicator text if necessary
+    if (_indicatorTextDisplayMode == UBProgressBarIndicatorTextDisplayModeProgressRight) {
+        [self drawText:context withRect:innerRect];
+        _indicatorTextLabel.textAlignment = NSTextAlignmentRight;
+    }
+
+    // Draw the indicator text if necessary
+    if (_indicatorTextDisplayMode == UBProgressBarIndicatorTextDisplayModeProgressCenter) {
+        [self drawText:context withRect:innerRect];
+    }
+    
+    // Draw the indicator text if necessary
+    if (_indicatorTextDisplayMode == UBProgressBarIndicatorTextDisplayModeFixedRight) {
+        [self drawText:context withRect:rect];
+        _indicatorTextLabel.textAlignment = NSTextAlignmentRight;
+    }
+}
+
+- (void)setProgressTintColors:(NSArray *)progressTintColors {
+    NSAssert(progressTintColors, @"progressTintColors must not be null");
+    NSAssert([progressTintColors count], @"progressTintColors must contain at least one element");
+
+    if (_progressTintColors != progressTintColors) {
+        _progressTintColors = progressTintColors;
+    }
+
+    NSMutableArray *colors  = [NSMutableArray arrayWithCapacity:[progressTintColors count]];
+    for (UIColor *color in progressTintColors) {
+        [colors addObject:(id)color.CGColor];
+    }
+    self.colors = colors;
+}
+
+- (void)initializeProgressBar {
+    //    _type
+    _progress        = UBProgressBarDefaultProgress;
+    _hideBackground       = NO;
+    _cornerRadius    = 0;
+    
+    _indicatorTextLabel                           = [[UILabel alloc] initWithFrame:self.frame];
+    _indicatorTextLabel.adjustsFontSizeToFitWidth = YES;
+    _indicatorTextLabel.backgroundColor           = [UIColor clearColor];
+    _indicatorTextLabel.lineBreakMode             = NSLineBreakByTruncatingHead;
+    _indicatorTextLabel.font = [UIFont fontWithName: @"System" size: 20];
+    _indicatorTextLabel.textAlignment             = NSTextAlignmentCenter;
+    _indicatorTextLabel.textColor                 = [UIColor clearColor];
+    _indicatorTextLabel.minimumScaleFactor        = 3;
+    
+    _indicatorTextDisplayMode = UBProgressBarIndicatorTextDisplayModeNone;
+    _typeProgress = UBProgressBarTypeInLine;
+    _circleProgressWidth = 5;
+    
+    _angle = 100.f;
+    _rotationAngle = 0.f;
+    
+    self.backgroundTintColor      = [UIColor blackColor];
+    self.progressTintColor        = self.backgroundColor;
+    self.progressBarInset         = UBProgressBarDefaultSizeInset;
+    self.backgroundColor          = [UIColor clearColor];
+}
 
 @end
