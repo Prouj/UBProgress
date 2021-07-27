@@ -4,7 +4,29 @@
 
 Here are some examples to show you how the `UBProgress` can be configured:
 
-**IN PROGRESS...**
+### Viewcode
+
+```swift
+
+ progressBar.setTypeText(.fixedCenter)
+ progressBar.setTypeForm(.circle)
+ progressBar.setFont(UIFont.systemFont(ofSize: 20))
+ progressBar.setLabelTextColor(.blue)
+ progressBar.progressTintColor = UIColor.red
+        
+ progressBar.circleProgressWidth = 5
+ progressBar.angle = 80
+ progressBar.rotationAngle = 50
+```
+<img src="https://github.com/Prouj/UBProgress/blob/00d68c36248413f633b0ffb64a59cb67d19c3790/Readme/result%20.png" width="400"> 
+
+### Storyboard
+
+Use one View and change the reference class to `UBProgress`. 
+
+<img src="https://github.com/Prouj/UBProgress/blob/00d68c36248413f633b0ffb64a59cb67d19c3790/Readme/class.png" width="400"> 
+
+<img src="https://github.com/Prouj/UBProgress/blob/00d68c36248413f633b0ffb64a59cb67d19c3790/Readme/property.png" width="400"> 
 
 ## Installation
 
