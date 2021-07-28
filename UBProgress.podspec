@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'UBProgress'
-  s.version  = '1.0.0'
+  s.version  = '1.0.1'
   s.platform = :ios, '9.0'
   s.summary  = 'Custom Progress Bars'
   s.homepage = 'https://github.com/Prouj/UBProgress'
