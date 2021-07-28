@@ -6,7 +6,8 @@ Here are some examples to show you how the `UBProgress` can be configured:
 
 ### Viewcode
 
-```swift
+#### Swift
+```Swift
 
  progressBar.setTypeText(.fixedCenter)
  progressBar.setTypeForm(.circle)
@@ -19,6 +20,18 @@ Here are some examples to show you how the `UBProgress` can be configured:
  progressBar.rotationAngle = 50
 ```
 <img src="https://github.com/Prouj/UBProgress/blob/00d68c36248413f633b0ffb64a59cb67d19c3790/Readme/result%20.png" width="400"> 
+
+#### Objective-C
+```Objective-C
+[_progressBar0 setTypeText: UBProgressBarIndicatorTextDisplayModeFixedCenter];
+[_progressBar0 setTypeForm: UBProgressBarTypeCircle];
+[_progressBar0 setFont: [UIFont systemFontOfSize: 20]];
+[_progressBar0 setLabelTextColor: [UIColor colorWithRed:1.0 green:0.50 blue:0.50 alpha:1.0]];
+ _progressBar0.circleProgressWidth = 5;
+ _progressBar0.angle = 80;
+ _progressBar0.rotationAngle = 50;
+ ```
+ <img src="https://github.com/Prouj/UBProgress/blob/1943beb9e04b9b2195e45b608a542198b7711940/Readme/CircleProgress-OBJC.png" width="400"> 
 
 ### Storyboard
 
